@@ -81,8 +81,8 @@ su -c ./boot-script.sh
 
 Fix resolver
 ```bash
-echo 'name server 1.1.1.1' > /etc/resolv.conf
-echo 'name server 8.8.8.8' >> /etc/resolv.conf
+echo 'nameserver 1.1.1.1' > /etc/resolv.conf
+echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 ```
 
 ## Troubelshoots

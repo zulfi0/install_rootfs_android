@@ -104,7 +104,8 @@ Reference:
 https://ivonblog.com/en-us/posts/termux-chroot-ubuntu/
 
 #
-What is the different with these tutorial ?
+What is the different with the tutorial in reference?
+
 Nothing, i just relize in the reference link did not unmount /sdcard and also instead of using `su - root`
 i use `sudo su` because when i use `tmux` my bash/zsh prompt is broken but with `sudo su` didn't
 

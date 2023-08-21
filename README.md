@@ -32,7 +32,7 @@ mkdir -p /data/local/rootfs/parrot-rootfs
 Extract the rootfs under /data/local/rootfs/parrot-rootfs
 ```bash
 cd /data/local/rootfs/parrot-rootfs/
-tar -xpf <path to linux's rootfs>
+tar -xpf <path to linux's rootfs> --numeric-owner
 ```
 
 create a boot-script.sh

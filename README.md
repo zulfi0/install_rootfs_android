@@ -43,26 +43,31 @@ create a boot-script.sh
 ROOTFS="/data/local/rootfs/parrot-rootfs"
 
 # Fix setuid issue
-mount -o remount,dev,suid /data
+busybox mount -o remount,dev,suid /data
 
-mount --bind /dev $ROOTFS/dev
-mount --bind /sys $ROOTFS/sys
-mount --bind /proc $ROOTFS/proc
-mount -t devpts devpts $ROOTFS/dev/pts
+busybox mount --bind /dev $ROOTFS/dev
+busybox mount --bind /sys $ROOTFS/sys
+busybox mount --bind /proc $ROOTFS/proc
+busybox mount -t devpts devpts $ROOTFS/dev/pts
 
 # Mount sdcard
-mount --bind /sdcard $ROOTFS/sdcard
+busybox mount --bind /sdcard $ROOTFS/sdcard
 
-# chroot into Ubuntu
+# chroot into rootfs
 # use `sudo` instead of `su` to fix the tmux prompt.
-chroot $ROOTFS /bin/sudo su
+
+if [ -e "$ROOTFS/bin/sudo" ]; then
+        busybox chroot $ROOTFS /bin/sudo su
+else
+        busybox chroot $ROOTFS /bin/su -
+fi
 
 # Umount everything after exit
-umount $ROOTFS/dev/pts
-umount $ROOTFS/dev
-umount $ROOTFS/proc
-umount $ROOTFS/sys
-umount $ROOTFS/sdcard
+busybox umount $ROOTFS/dev/pts
+busybox umount $ROOTFS/dev
+busybox umount $ROOTFS/proc
+busybox umount $ROOTFS/sys
+busybox umount $ROOTFS/sdcard
 ```
 Make the script executable
 ```bash

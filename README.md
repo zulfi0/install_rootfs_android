@@ -121,11 +121,13 @@ usermod -G 3003 -a root
 
 follow the following steps: https://ivonblog.com/en-us/posts/termux-chroot-ubuntu/
 
-##
 
-Reference: https://ivonblog.com/en-us/posts/termux-chroot-ubuntu/
 
-##
+Reference:&#x20;
+
+https://ivonblog.com/en-us/posts/termux-chroot-ubuntu/
+
+
 
 What is the different with the tutorial in reference?
 

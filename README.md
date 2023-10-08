@@ -58,6 +58,9 @@ busybox mount --bind /sys $ROOTFS/sys
 busybox mount --bind /proc $ROOTFS/proc
 busybox mount -t devpts devpts $ROOTFS/dev/pts
 
+# mount binderfs it's necessary for using bluebinder in Nethunter kernel
+busybox mount -r -o bind /dev/binderfs $ROOTFS/dev/binderfs
+
 # Mount sdcard
 busybox mount --bind /sdcard $ROOTFS/sdcard
 
@@ -72,7 +75,8 @@ fi
 
 # Umount everything after exit
 busybox umount $ROOTFS/dev/pts
-busybox umount $ROOTFS/dev
+busybox umount -l $ROOTFS/dev/binderfs
+busybox umount -l $ROOTFS/dev
 busybox umount $ROOTFS/proc
 busybox umount $ROOTFS/sys
 busybox umount $ROOTFS/sdcard

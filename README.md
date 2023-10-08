@@ -16,7 +16,9 @@ tested on device redmi note 8 with android 13 (custom rom)
 Download linux rootfs:
 
 *   Parrot
-
+  
+    https://deb.parrot.sh/parrot/iso/5.3/
+    
     http://mirror.math.princeton.edu/pub/parrot/iso/5.3/Parrot-rootfs-5.3\_arm64.tar.xz (48 M)
 *   Kali
 

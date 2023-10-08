@@ -19,7 +19,7 @@ Download linux rootfs:
   
     https://deb.parrot.sh/parrot/iso/5.3/
     
-    http://mirror.math.princeton.edu/pub/parrot/iso/5.3/Parrot-rootfs-5.3\_arm64.tar.xz (48 M)
+    http://mirror.math.princeton.edu/pub/parrot/iso/5.3/Parrot-rootfs-5.3_arm64.tar.xz (48 M)
 *   Kali
 
     https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-full.tar.xz (full: 1.7 GB)

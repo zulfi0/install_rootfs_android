@@ -47,8 +47,11 @@ create a boot-script.sh
 ```bash
 #!/bin/sh
 
-# The path of rootfs
+# Rootfs path
 ROOTFS="/data/local/rootfs/parrot-rootfs"
+
+# Mount chroot dir for docker support
+busybox mount -o bind $ROOTFS $ROOTFS
 
 # Fix setuid issue
 busybox mount -o remount,dev,suid /data
@@ -58,7 +61,12 @@ busybox mount --bind /sys $ROOTFS/sys
 busybox mount --bind /proc $ROOTFS/proc
 busybox mount -t devpts devpts $ROOTFS/dev/pts
 
-# mount binderfs it's necessary for using bluebinder in Nethunter kernel
+# Mount tmpfs into chroot
+busybox mount -t tmpfs -o mode=755 tmpfs $ROOTFS/sys/fs/cgroup
+mkdir -p $ROOTFS/sys/fs/cgroup/devices
+busybox mount -t cgroup -o devices cgroup $ROOTFS/sys/fs/cgroup/devices
+
+# Mount binderfs it's necessary for using bluebinder in Nethunter kernel
 busybox mount -r -o bind /dev/binderfs $ROOTFS/dev/binderfs
 
 # Mount sdcard
@@ -74,11 +82,13 @@ else
 fi
 
 # Umount everything after exit
-busybox umount $ROOTFS/dev/pts
 busybox umount -l $ROOTFS/dev/binderfs
+busybox umount $ROOTFS/dev/pts
 busybox umount -l $ROOTFS/dev
-busybox umount $ROOTFS/proc
+busybox umount $ROOTFS/sys/fs/cgroup/devices
+busybox umount $ROOTFS/sys/fs/cgroup
 busybox umount $ROOTFS/sys
+busybox umount $ROOTFS/proc
 busybox umount $ROOTFS/sdcard
 ```
 
@@ -105,6 +115,31 @@ Fix resolver
 ```bash
 echo 'nameserver 1.1.1.1' > /etc/resolv.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
+```
+
+### SSH
+run ssh server in chroot:
+install openssh
+```bash
+sudo apt install openssh-client openssh-server
+```
+change root password.
+```bash
+passwd root
+```
+add the following line to the `/etc/ssh/sshd_config`
+```bash
+PermitRootLogin yes
+```
+then start the service
+```bash
+mkdir -p /run/sshd
+service ssh start
+```
+or
+```bash
+mkdir -p /run/sshd
+sshd -D &
 ```
 
 ### Troubelshoots

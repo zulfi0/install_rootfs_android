@@ -139,7 +139,7 @@ service ssh start
 or
 ```bash
 mkdir -p /run/sshd
-sshd -D &
+/usr/sbin/sshd -D &
 ```
 
 ### Troubelshoots

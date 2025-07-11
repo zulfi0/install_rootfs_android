@@ -1,6 +1,8 @@
 # install linux rootfs android
 
-### Requirement
+## install linux rootfs android
+
+#### Requirement
 
 * Rooted android devices.
 * Android 12+ (tested on 13)
@@ -11,15 +13,15 @@ Note:
 tested on device redmi note 8 with android 13 (custom rom)
 ```
 
-### Download linux rootfs
+#### Download linux rootfs
 
 Download linux rootfs:
 
 *   Parrot
-  
+
     https://deb.parrot.sh/parrot/iso/5.3/
-    
-    http://mirror.math.princeton.edu/pub/parrot/iso/5.3/Parrot-rootfs-5.3_arm64.tar.xz (48 M)
+
+    http://mirror.math.princeton.edu/pub/parrot/iso/5.3/Parrot-rootfs-5.3\_arm64.tar.xz (48 M)
 *   Kali
 
     https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-full.tar.xz (full: 1.7 GB)
@@ -117,32 +119,41 @@ echo 'nameserver 1.1.1.1' > /etc/resolv.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 ```
 
-### SSH
-run ssh server in chroot:
-install openssh
+#### SSH
+
+run ssh server in chroot: install openssh
+
 ```bash
 sudo apt install openssh-client openssh-server
 ```
+
 change root password.
+
 ```bash
 passwd root
 ```
+
 add the following line to the `/etc/ssh/sshd_config`
+
 ```bash
 PermitRootLogin yes
 ```
+
 then start the service
+
 ```bash
 mkdir -p /run/sshd
 service ssh start
 ```
+
 or
+
 ```bash
 mkdir -p /run/sshd
 /usr/sbin/sshd -D &
 ```
 
-### Troubelshoots
+#### Troubelshoots
 
 if encountered `Download is performed unsandboxed as root` warning run the following inside the rootfs:
 
@@ -154,18 +165,18 @@ usermod -g 3003 -G 3003,3004 -a _apt
 usermod -G 3003 -a root
 ```
 
-#### Audio & VNC ?
+**Audio & VNC ?**
 
 follow the following steps: https://ivonblog.com/en-us/posts/termux-chroot-ubuntu/
 
-#
+##
 
-Reference:&#x20;
+Reference:
 
 https://ivonblog.com/en-us/posts/termux-chroot-ubuntu/
 
-#
+##
 
 What is the different with the tutorial in reference?
 
-Nothing, i just relize in the reference link did not unmount /sdcard and also instead of using `su - root` i use `sudo su` because when i use `tmux` my bash/zsh prompt is broken but with `sudo su` didn't
+Nothing, i just relize in the reference link did not unmount /sdcard and also instead of using `su - root` i use `sudo su` because when i use `tmux` my bash/zsh prompt is broken but with `sudo su` it wasn't.

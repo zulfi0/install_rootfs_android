@@ -106,8 +106,8 @@ mkdir -p /data/local/rootfs/parrot-rootfs
 Extract the rootfs archive into that directory:
 
 ```bash
-cd <path to linux rootfs>
-busybox tar -xpf <path to linux rootfs> --numeric-owner
+cd /data/local/rootfs/parrot-rootfs
+busybox tar -xpf <path to rootfs.tar.xz> --numeric-owner
 ```
 
 #### Create the Boot Script
